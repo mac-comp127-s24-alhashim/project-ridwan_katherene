@@ -35,8 +35,8 @@ public class Bird extends Image{
         //velpocity ten when it jumps
         
     }
-    public boolean collisionPipe(Pipe pipe){
-        if (pipe.getPosition() == this.y){
+    public boolean collisionwithPipe(Pipe pipe){
+        if (this.y >= pipe.getYTop()&& this.y <= pipe.getYBottom()){
             //the bird's Y coordinate equals the pipe's Y coordinate
             return true;
         }
@@ -47,6 +47,7 @@ public class Bird extends Image{
         g.drawImage(birdImage, x,y, width, height, null);
         // draws the bird on the screen.
     }
+    //do bounds
 }
 
 
