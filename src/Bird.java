@@ -1,8 +1,9 @@
 import edu.macalester.graphics.Image;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 
-public class Bird extends Image{
-    private int x, y;
+public class Bird {
+    private int x;
+    private int y;
     private int width;
     private int height;
     private int velocity;
@@ -13,12 +14,14 @@ public class Bird extends Image{
 
     public Bird(int x, int y, int width, int height, Image birdImage) {
         //paramteres
-        super("flappyBird.png");
+        //super("flappyBird.png");
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.birdImage = birdImage;
+        Image birdy = new Image("flappyBird.png");
+        Bird bird = new Bird(50,200, 50,50, birdImage);
     }
     public void fall(){           
 
@@ -38,6 +41,9 @@ public class Bird extends Image{
         //velpocity ten when it jumps
         
     }
+    public Image getBirdImage(){
+        return birdImage;
+    }
     public boolean collisionwithPipe(Pipe pipe){
         if (this.y >= pipe.getYTop()&& this.y <= pipe.getYBottom()){
             //the bird's Y coordinate equals the pipe's Y coordinate
@@ -45,10 +51,6 @@ public class Bird extends Image{
         }
         return false;
         //Y coordinate does not equal the pipe's Y coordinate
-    }
-    public void draw(Graphics g){
-        g.drawImage(birdImage, x,y, width, height, null);
-        // draws the bird on the screen.
     }
     //do bounds
 }

@@ -1,7 +1,7 @@
 import edu.macalester.graphics.Image;
 import java.awt.Graphics;
-
-public class Pipe  extends Image{
+import path.to.bird;
+public class Pipe{
     // the pipes can't touch each other, generate at different heights, induce the game to stop if the bird touches
     // the pipes
     private int x;
@@ -17,8 +17,8 @@ public class Pipe  extends Image{
     //private static final int height
     //speed of pipes
 
-    public Pipe(int x, int yTop, int yBottom, int width, int height, 
-    Image topPipeImage, Image bottomPipeImage) {
+    public Pipe(int x, int yTop, int width, int height, Image bottImage, Image topPipeImage) {
+
        // super("bottomPipe.png");
         //super(path: "upwardPipe.png");
         //initlizeing variables
@@ -26,7 +26,6 @@ public class Pipe  extends Image{
         this.yTop = yTop;
         this.yBottom = yBottom;
         this.width = 50;
-        this.speed = 2;
         this.height = height;
         this.topPipeImage = topPipeImage;
         this.bottomPipeImage = bottomPipeImage;
@@ -36,6 +35,7 @@ public class Pipe  extends Image{
         //this.topPipeImage = topPipeImage;
         //his.bottomPipeImage = bottomPipeImage;
     }
+
     public void move () {
         x -= SPEED;
         //moves pipe to left decreasing x- coordinate
@@ -43,21 +43,29 @@ public class Pipe  extends Image{
     }
     public boolean collisionPipe(Bird bird) {
         //checks if bird collides with pipe
-        int birdX= bird.getX();
-        int birdY = bird.getY();
-        int birdWidth = bird.getWidth();
-        int birdHeight = bird.getHeight();
+        if(bird != null){
+            int birdX= bird.getX();
+            int birdY = bird.getY();
+            int birdWidth = bird.getWidth();
+            int birdHeight = bird.getHeight();
+        }
+
         
-        for(int y = yTop; y <= yBottom + height; y++){
-            if(birdX < x +width && birdX + birdWidth> x &&
-            birdY < y + height && birdY + birdHeight> y ){
-                return true;
+            for(int y = yTop; y <= yBottom + height; y++){
+                if(birdX < pipe.getX()+ pipe.getWidth()) &&
+                    birdX + bird.getWidth() > pipe.getX &&z
+                
+                    return true;
             }
         }
         return false;
     }
+    public boolean ofScreen(){
+        return x + width <0;
+    }
     public int getX(){
         return x;
+    }
     public int getYTop(){
         return yTop;
     }
@@ -68,15 +76,12 @@ public class Pipe  extends Image{
     public int getWidth(){
         return width;
     }
-    public int getHiegth(){
+    public int getHeigth(){
         return height;
     }
-    public void draw(Graphics g){
-        g.drawImage(topPipeImage, x, yTop, width, height, null);
-        //draws images
-        g.drawImage(bottomPipeImage, x, yBottom, width, height, null);
-
-    }
 }
+
+
+
 
 

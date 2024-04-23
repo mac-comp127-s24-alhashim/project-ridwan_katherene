@@ -1,23 +1,29 @@
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.CanvasWindow;
-public class scoreboard {
+public class Scoreboard {
     private int score;
     private GraphicsText scoreText;
 
-    public Scoreboard(){
+    public Scoreboard(CanvasWindow canvas){
         score = 0;
-        scoreText = new GraphicsText("Score:"+ score, 10,2)
+        scoreText = new GraphicsText("Score:"+ score, 10,20);
+        canvas.add(scoreText);
+        
     }
-    public void increment(){
+    public void incrementScore(){
         score++;
+        updateScoreText();
     }
     public int getScore(){
         return score;
     }
     public void resetScore(){
         score = 0;
+        updateScoreText();
     }
-    public void draw(Graphics g){
-        g.drawString("Score:"+ score, 10, 20);
+    private void updateScoreText(){
+        scoreText.setText("Score:"+score);
+        
     }
+    
 }
