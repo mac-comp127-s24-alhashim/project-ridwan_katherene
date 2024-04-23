@@ -1,8 +1,9 @@
 import edu.macalester.graphics.Image;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 
-public class Bird extends Image {
-    private int x, y;
+public class Bird  {
+    private int x;
+    private int y;
     private int width;
     private int height;
     private int velocity;
@@ -21,7 +22,8 @@ public class Bird extends Image {
         this.width = width;
         this.height = height;
         this.birdImage = birdImage;
-
+        Image birdy = new Image("flappyBird.png");
+        Bird bird = new Bird(50,200, 50,50, birdImage);
     }
 }
 //     public void fall(){           
