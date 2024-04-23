@@ -1,8 +1,12 @@
+import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.CanvasWindow;
 public class scoreboard {
     private int score;
+    private GraphicsText scoreText;
 
     public Scoreboard(){
         score = 0;
+        scoreText = new GraphicsText("Score:"+ score, 10,2)
     }
     public void increment(){
         score++;
