@@ -1,12 +1,16 @@
 import edu.macalester.graphics.GraphicsText;
+
+import java.awt.Graphics;
+
 import edu.macalester.graphics.CanvasWindow;
 public class scoreboard {
     private int score;
     private GraphicsText scoreText;
 
-    public Scoreboard(){
+    public int Scoreboard(){
         score = 0;
-        scoreText = new GraphicsText("Score:"+ score, 10,2)
+        scoreText = new GraphicsText("Score:"+ score, 10,2);
+        return score;
     }
     public void increment(){
         score++;
