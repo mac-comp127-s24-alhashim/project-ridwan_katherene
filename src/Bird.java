@@ -5,12 +5,11 @@ public class Bird extends Image{
         super("flappyBird.png");
 
     }
-
-    public void fall(){
+    public void fall(){           
 
     }
 
     public void jump(){
-        
+
     }
 }
