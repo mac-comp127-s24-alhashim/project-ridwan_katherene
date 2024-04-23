@@ -1,6 +1,6 @@
 import edu.macalester.graphics.Image;
 import java.awt.Graphics;
-import path.to.bird;
+
 public class Pipe{
     // the pipes can't touch each other, generate at different heights, induce the game to stop if the bird touches
     // the pipes
