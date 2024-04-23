@@ -22,8 +22,8 @@ public class Bird  extends Image{
         this.width = width;
         this.height = height;
         this.birdImage = birdImage;
-        Image birdy = new Image("flappyBird.png");
-        Bird bird = new Bird(50,200, 50,50, birdImage);
+        // Image birdy = new Image("flappyBird.png");
+        // Bird bird = new Bird(50,200, 50,50, birdImage);
     }
 }
 //     public void fall(){           
