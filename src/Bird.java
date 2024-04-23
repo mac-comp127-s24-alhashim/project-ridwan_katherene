@@ -1,7 +1,7 @@
 import edu.macalester.graphics.Image;
-//import java.awt.Graphics;
+import java.awt.Graphics;
 
-public class Bird  {
+public class Bird  extends Image{
     private int x;
     private int y;
     private int width;
@@ -13,7 +13,7 @@ public class Bird  {
 
 
     public Bird(int x, int y, int width, int height, Image birdImage) {
-        //paramteres
+        // paramteres
         super("flappyBird.png");
         setMaxWidth(width);
         setMaxHeight(height);

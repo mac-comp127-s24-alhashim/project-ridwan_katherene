@@ -1,7 +1,7 @@
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
-// import java.awt.Dimension;
+import java.awt.Dimension;
 import java.awt.Color;
 import edu.macalester.graphics.events.Key;
 import java.awt.BorderLayout;
