@@ -25,6 +25,20 @@ public class Bird  extends Image{
         // Image birdy = new Image("flappyBird.png");
         // Bird bird = new Bird(50,200, 50,50, birdImage);
     }
+    public void fall() {
+        y += velocity;
+        velocity += GRAVITY;
+    }
+    public void updatePosition(){
+        fall();
+    }
+    public boolean collisionwithPipe(Pipe pipe){
+                 if (x + width >= pipe.getX() && x <= pipe.getX() + pipe.getWidth() &&
+                    y >= pipe.getYTop() && y + height <= pipe.getYBottom ()) {
+                        return true;
+                 }
+                 return false;
+            }
 }
 //     public void fall(){           
 

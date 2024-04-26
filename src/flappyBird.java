@@ -7,6 +7,8 @@ import edu.macalester.graphics.events.Key;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.channels.Pipe;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -29,11 +31,12 @@ public class flappyBird {
         background.setMaxWidth(WINDOW_WIDTH);
 
 
-        bird = new Bird(0,0,10, 10, new Image ("flappyBird.png"));
+        bird = new Bird(0,0,50, 50, new Image ("flappyBird.png"));
         canvas.add(background);
         canvas.add(bird);
         canvas.draw();
     }
+   
     public static void main(String[] args) {
         new flappyBird();
     }
