@@ -1,3 +1,4 @@
+package flappyBirdGame;
 public class PipeManager {
 
     //the pipes are scrolling in appearance, look at hw5 audiosynth, 
