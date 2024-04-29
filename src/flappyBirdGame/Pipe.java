@@ -9,7 +9,7 @@ import edu.macalester.graphics.CanvasWindow;
 
 public class Pipe  {
 //     // the pipes can't touch each other, generate at different heights, induce the game to stop if the bird touches
-//     // the pipes
+
     private int x;
     private int yTop;
     private int yBottom;
@@ -96,7 +96,7 @@ public class Pipe  {
                 return canvas.getWidth(); 
         }
         public void updateImages(){
-                topPipeImage.setPosition(x,yTop);
+                topPipeImage.setPosition(x,generateRandomYTop());
                 bottomPipeImage.setPosition(x, yBottom);
         }
         public Image getTopPipeImage(){
@@ -111,12 +111,7 @@ public class Pipe  {
                 yBottom = yTop + gap;
         }
 
-    // public void draw(Graphics canvas){
-        //canvas.drawImage(topPipeImage, x, yTop, width, height, null);
-//         //draws images
-        //canvas.drawImage(bottomPipeImage, x, yBottom, width, height, null);
 
-   // }
  }
 
 

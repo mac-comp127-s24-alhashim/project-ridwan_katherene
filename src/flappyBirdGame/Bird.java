@@ -1,10 +1,12 @@
 package flappyBirdGame;
+
 import edu.macalester.graphics.Image;
 
+
+
 //import java.awt.Canvas;
-//import java.awt.Graphics;
+import java.awt.Graphics;
 //import flappyBirdGame.flappyBird;
-///import flappyBirdGame.Pipe;
 ///import edu.macalester.graphics.CanvasWindow;
 
 public class Bird  extends Image{
@@ -17,23 +19,30 @@ public class Bird  extends Image{
     private boolean isAlive;
     private final int GRAVITY = -1;
     private final int jumpHeight = -10;
+    private double y2;
+    private double y3;
   
     //the constant  GRAVITY represnts force pulling bird down 
 
 
     public Bird(double x, double y, double width, double height, Image birdImage){
         // paramteres
-        //super(birdImage.getImagePath());
-        super("flappyBird.png");
+        ///super("flappyBird.png");
+        //super("flappyBird.png");
+
+        height = y;
+        y3 = y;
+        y2 = y;
+        birdImage = new Image("flappyBird.png");
         setMaxWidth(width);
         setMaxHeight(height);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.birdImage = new Image("flappyBird.png");
+        this.birdImage = birdImage;
+        //new Image("flappyBird.png");
         isAlive= true;
-       // birdImage = new Image("flappyBird.png");
         // Image birdy = new Image("flappyBird.png");
         // Bird bird = new Bird(50,200, 50,50, birdImage);
     }
@@ -65,16 +74,16 @@ public class Bird  extends Image{
         }
     public boolean collisionWithPipe(Pipe pipe){
                  if (x + width >= pipe.getX() && x <= pipe.getX() + pipe.getWidth() &&
-                    y >= pipe.getYTop() && y + height <= pipe.getYBottom ()) {
-                        isAlive = false;
-                        return true;
+                         y >= pipe.getYTop() && y + height <= pipe.getYBottom ()) {
+                    isAlive = false;
+                    return true;
                  }
                  return false;
-            }
+    }
   
     public Image getBirdImage(){
         return birdImage;
-}
+    }
     public void newUpdatePosition() {
         fall();
         if (y< 0) {
@@ -84,7 +93,7 @@ public class Bird  extends Image{
             
             isAlive = false;
         }
-}
+    }
 }
 
 

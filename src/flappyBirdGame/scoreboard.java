@@ -22,7 +22,7 @@ public class scoreboard {
         canvas.add(scoreText);
         background = new Rectangle(10,10,150,80);
         background.setFillColor(Color.LIGHT_GRAY);
-        canvas.add(scoreText);
+        canvas.add(background);
     }
     public void incrementScore(){
         score++;

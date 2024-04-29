@@ -1,16 +1,19 @@
 package flappyBirdGame;
+
 import edu.macalester.graphics.CanvasWindow;
+///import edu.macalester.graphics.GraphicsObject;
 ///import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
 ///import java.awt.Dimension;
 import java.awt.Color;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Rectangle;
-import edu.macalester.graphics.*;
+//import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.events.KeyboardEvent;
-import flappyBirdGame.Bird;
-import flappyBirdGame.Pipe;
+
+
+//import flappyBirdGame.*;
 
 
 ///import java.awt.BorderLayout;
@@ -27,22 +30,22 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class flappyBird {
+public class FlappyBird {
 
     private Bird bird;
     //private List <Pipe> pipes;
     private scoreboard scoreboard;
     private CanvasWindow canvas;
-    private static final int WINDOW_WIDTH = 8000;
-    private static final int WINDOW_HEIGHT = 6000;
-    private static final int pipesInterval = 250;
+    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_HEIGHT = 600;
+    private static final int PIPES_INTERVAL = 250;
     private Image topPipeImage;
     private Image bottomPipeImage;
     private Image backgroundImage;
     //rivate static final double GRAVITY = 0.5;
     private List<Pipe> pipes = new ArrayList<>();
 
-    public flappyBird() {
+    public FlappyBird() {
         canvas = new CanvasWindow("By Ridwan Osman and Katherene", WINDOW_WIDTH, WINDOW_HEIGHT);
         //canvas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //canvas.setBounds(100,100,450,300);
@@ -61,8 +64,12 @@ public class flappyBird {
         canvas.add(bird);
         bottomPipeImage = new Image("bottomPipe.png");
         topPipeImage = new Image("upwardPipe.png");
+       
 
-        //pipes = new ArrayList<>();
+
+        pipes = new ArrayList<>();
+        
+      ;
         createPipe();
         canvas.draw();
         scoreboard = new scoreboard(canvas);
@@ -73,7 +80,7 @@ public class flappyBird {
         });
        
         startScreen();
-        gameLoop();
+        //gameLoop();
         
         //canvas.add(scoreboard);
     }
@@ -83,7 +90,7 @@ public class flappyBird {
         canvas.add(startScreenBackground);
         GraphicsText title = new GraphicsText( "Flappy Bird");
         title.setFontSize(70);
-        ///title.setFontbold(true);
+        ////title.setFontbold(true);
         title.setPosition(WINDOW_WIDTH/2- title.getWidth()/2 , WINDOW_HEIGHT/2);
         canvas.add(title);
 
@@ -99,7 +106,7 @@ public class flappyBird {
                 canvas.remove(startScreenBackground);
                 canvas.remove(title);
                 canvas.remove(instructions);
-                //gameLoop();
+                gameLoop();
     
            
             
@@ -123,12 +130,11 @@ public class flappyBird {
             bottomPipeImage = new Image("bottomPipe.png");
         }
         Pipe pipe = new Pipe(pipeX, pipeYTop, pipeYBottom, pipeWidth, pipeHeight, topPipeImage, bottomPipeImage, canvas);
-        //GraphicsObject pipeObject = pipe.createGraphicsObject();
-        //topPipeImage = new Image( "upwardPipe.png");
-        //bottomPipeImage = new Image ("bottomPipe.png");
+        pipe.updateImages();
         pipes.add(pipe);
         canvas.add(pipe.getTopPipeImage());
         canvas.add(pipe.getBottomPipeImage());
+
        
     }
     public void checkCrash(){
@@ -148,12 +154,6 @@ public class flappyBird {
             
         }
     }
-    public Image getTopPipeImage(){
-        return topPipeImage;
-    }
-    public Image getBottomPipeImage(){
-        return bottomPipeImage;
-    }
     public void resetGame() {
         //for (Pipe pipe : pipes){
            /// pipes.remove(pipe);
@@ -163,6 +163,7 @@ public class flappyBird {
         scoreboard.resetScore();
         //resetPipe();
         createPipe();
+        //canvas.remove((GraphicsObject) pipes);
         // Assuming your CanvasWindow or bird object has these methods to reset the game
         // this.canvas.getGame().restart();
         // this.canvas.update();
@@ -182,6 +183,8 @@ public class flappyBird {
         }
         canvas.draw();
     }
+   
+
     public void gameLoop(){
         int frameCount = 0;
         while(true){
@@ -190,29 +193,28 @@ public class flappyBird {
             canvas.add(bird.getBirdImage());
             for(Pipe pipe :pipes){
                 pipe.move();
-                if(pipe.getX()<0){
-                    pipes.remove(pipe);
-                }
-
-                if (frameCount % pipesInterval == 0) {
+                if (frameCount % PIPES_INTERVAL == 0) {
                     createPipe();
                 }
                 if (bird.collisionWithPipe(pipe) || 
                     bird.getY() < 0 || bird.getY() >= canvas.getHeight()) {
                     JOptionPane.showMessageDialog(null, "Game Over");
                     resetGame();
-                    break;
+                    return;
                     }
             } 
             canvas.draw();
             frameCount++;
-            try{Thread.sleep(20);
+            try{
+                Thread.sleep(20);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+    }
+        
             
-        }
+        
     private void onKeyPress(KeyboardEvent event){
         if(event.getKey() == Key.SPACE){
             bird.jumpBird();
@@ -223,10 +225,13 @@ public class flappyBird {
 
    
     public static void main(String[] args) {
-        flappyBird game = new flappyBird();
+        FlappyBird game = new FlappyBird();
         game.startScreen();
         game.gameLoop();
     }
 }
+
+
+
 
 
