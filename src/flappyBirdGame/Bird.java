@@ -1,15 +1,9 @@
 package flappyBirdGame;
-
 import edu.macalester.graphics.Image;
-
-
-
-//import java.awt.Canvas;
 import java.awt.Graphics;
-//import flappyBirdGame.flappyBird;
-///import edu.macalester.graphics.CanvasWindow;
 
-public class Bird  extends Image{
+
+public class Bird extends Image {
     private double x;
     private double y;
     private double width;
@@ -25,24 +19,20 @@ public class Bird  extends Image{
     //the constant  GRAVITY represnts force pulling bird down 
 
 
-    public Bird(double x, double y, double width, double height, Image birdImage){
-        // paramteres
-        ///super("flappyBird.png");
-        //super("flappyBird.png");
+    public Bird(double x, double y, double width, double height){
+        super(x,y,"flappyBird.png");
 
-        height = y;
-        y3 = y;
-        y2 = y;
-        birdImage = new Image("flappyBird.png");
+        // height = y;
+        // y3 = y;
+        // y2 = y;
+        // setCenter(width * 0.5,height * 0.5);
         setMaxWidth(width);
         setMaxHeight(height);
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.birdImage = birdImage;
-        //new Image("flappyBird.png");
-        isAlive= true;
+        isAlive = true;
         // Image birdy = new Image("flappyBird.png");
         // Bird bird = new Bird(50,200, 50,50, birdImage);
     }
@@ -86,49 +76,12 @@ public class Bird  extends Image{
     }
     public void newUpdatePosition() {
         fall();
-        if (y< 0) {
+        if (y < 0) {
             y = 0;
             velocity = 0; 
-        } else if (y + height > getHeight()) {
-            
+        } else if (y + height > getHeight()) { 
             isAlive = false;
         }
     }
 }
-
-
-//     public void fall(){           
-
-
-    
-//     public updatePosition(){
-//         y += velocity;
-//         velocity += GRAVITY;
-//         //updates birds veloicty by adding garvity
-//     //public void fall(){
-
-//     }
-
-//     public void jump(){
-
-//         velocity = 10;
-//         //velpocity ten when it jumps
-        
-//     }
-//     public boolean collisionwithPipe(Pipe pipe){
-//         if (this.y >= pipe.getYTop()&& this.y <= pipe.getYBottom()){
-//             //the bird's Y coordinate equals the pipe's Y coordinate
-//             return true;
-//         }
-//         return false;
-//         //Y coordinate does not equal the pipe's Y coordinate
-//     }
-//     public void draw(Graphics g){
-//         g.drawImage(birdImage, x,y, width, height, null);
-//         // draws the bird on the screen.
-//     }
-//     //do bounds
-// }
-
-// }
 

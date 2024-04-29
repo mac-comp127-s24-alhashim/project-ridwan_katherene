@@ -1,6 +1,5 @@
 package flappyBirdGame;
 import edu.macalester.graphics.Image;
-//import java.util.Random;
 //import java.math.*;
 import edu.macalester.graphics.CanvasWindow;
 //import flappyBirdGame.Bird;
@@ -22,11 +21,13 @@ public class Pipe  {
     //private flappyBird game;
     private static final int gap = 200;
     //private static final int max = 457;
-    private CanvasWindow canvas;
+    private final CanvasWindow canvas;
     //private static final int height;
 //     //speed of pipes
 
-        public Pipe(int x, int yTop, int yBottom, double width, double height, Image topPipeImage, Image bottomPipeImage, CanvasWindow canvas) {
+        public Pipe(int x, int yTop, int yBottom, double width, double height, Image topPipeImage, Image bottomPipeImage, 
+        CanvasWindow canvas) {
+                this.canvas = canvas;
                 this.x = x;
                 this.yTop = generateRandomYTop();
                 this.yBottom = yBottom + gap;
@@ -34,12 +35,11 @@ public class Pipe  {
                 //this.gap = gap;
                 //this.SPEED = speed;
                 this.height = height;
-                this.canvas= canvas;
                 this.topPipeImage = topPipeImage;
                 this.bottomPipeImage = bottomPipeImage;
                 topPipeImage = new Image("upwardPipe.png");
                 bottomPipeImage = new Image ("bottomPipe.png");
-                updateImages();
+                // updateImages();
                 //this.game = game;
                 //random = new Random();
 
@@ -62,10 +62,10 @@ public class Pipe  {
                 return x;
         }
         public int generateRandomYTop(){
-                int maxTop = (int)(getCanvasHeigth()- height - gap);
-                return(int)(Math.random()+maxTop);
+                int maxTop = (int)(getCanvasHeight() - height - gap);
+                return(int)(Math.random()+ maxTop);
         }
-        private int getCanvasHeigth(){
+        private int getCanvasHeight(){
                 return canvas.getHeight();
         }
         public int getYBottom(){
@@ -75,7 +75,7 @@ public class Pipe  {
         public double getWidth(){
         return width;
         }
-        public double getHeigth(){
+        public double getHeight(){
                 return height;
         }
         public boolean collisionWithPipe(Bird bird) {
