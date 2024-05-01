@@ -21,6 +21,7 @@ public class Bird extends Image {
 
     public Bird(double x, double y, double width, double height){
         super(x,y,"flappyBird.png");
+        this.velocity = velocity;
 
         // height = y;
         // y3 = y;
@@ -43,10 +44,17 @@ public class Bird extends Image {
     public boolean isAlive() {
         return isAlive;
     }
+    public void move(){
+        velocity = -6;
+        this.y += velocity;
+    } 
     public void jumpBird(){
         velocity = jumpHeight;
+        System.out.println("jump bird");
+        this.newUpdatePosition(); 
     }
     public void updatePosition(){
+        System.out.println("Update position");
         fall();
         if (y < 0) {
             y = 0;
@@ -75,13 +83,15 @@ public class Bird extends Image {
         return birdImage;
     }
     public void newUpdatePosition() {
-        fall();
-        if (y < 0) {
-            y = 0;
-            velocity = 0; 
-        } else if (y + height > getHeight()) { 
-            isAlive = false;
-        }
+        System.out.println("new Update position");
+        move();
+        // fall();
+        // if (y < 0) {
+        //     y = 0;
+        //     velocity = 0; 
+        // } else if (y + height > getHeight()) { 
+        //     isAlive = false;
+        // }
     }
 }
 
