@@ -13,7 +13,6 @@ public class scoreboard {
     private int score;
     private GraphicsText scoreText;
     private Rectangle background;
-    //private flappyBird game;
 
     public scoreboard(CanvasWindow canvas){
         //this.game = game;
