@@ -28,9 +28,23 @@ public class Bird extends Image {
 
     public void moveBird(){
         System.out.println("move bird");
-        velocity = -6;
+        velocity = -1;
         this.y += velocity;
         this.setCenter(new Point(this.x, this.y));
+    }
+    public boolean updatePosition() {
+        double centerX_1 = ((velocity))+ x;
+        double centerY_1 = ((velocity))+y;
+            if (0<= centerX_1 && centerX_1 <= 0 && 0 <= centerY_1 && centerY_1<=0) {
+                x = centerX_1;
+                y = centerY_1;
+                this.setPosition(x,x);
+                velocity = velocity-(gravity);
+                return true;
+            } 
+            return false;
+        
+
         // velocity += gravity;
         // this.y += velocity;
     }
@@ -40,15 +54,15 @@ public class Bird extends Image {
         System.out.println("jump bird");
         this.newUpdatePosition(); 
     }
-    public void updatePosition(){
-        System.out.println("Update position");
-        if (y < 0) {
-            y = 0;
-            velocity = 0;
-        } else if (y + height > getHeight()) {
-            isAlive = false;
-        }
-    }
+    // public void updatePosition(){
+    //     System.out.println("Update position");
+    //     if (y < 0) {
+    //         y = 0;
+    //         velocity = 0;
+    //     } else if (y + height > getHeight()) {
+    //         isAlive = false;
+    //     }
+    // }
   
     public void newUpdatePosition() {
         System.out.println("new Update position");

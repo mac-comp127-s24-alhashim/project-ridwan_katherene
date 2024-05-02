@@ -21,6 +21,10 @@ public class FlappyBird {
     private Image backgroundImage;
     private List<UpwardPipe> pipes = new ArrayList<>();
     private boolean isStartScreen;
+    private UpwardPipe upwardPipe;
+    private BottomPipe bottomPipe;
+    private Image topPipeImage; 
+    private Image bottomPipeImage;
 
     public FlappyBird() {
         this.isStartScreen = true;
@@ -35,7 +39,7 @@ public class FlappyBird {
         backgroundImage.setMaxWidth(WINDOW_WIDTH);
         canvas.add(backgroundImage);
      
-        bird = new Bird(canvas.getWidth() * 0.5,canvas.getHeight() * 0.5, 50,50);
+        bird = new Bird(canvas.getWidth() * 0.5,canvas.getHeight() * 0.5, 40,40);
         bird.setCenter(canvas.getWidth() * 0.5,canvas.getHeight() * 0.5 );
         canvas.add(bird);
         canvas.onKeyDown(event -> { 
@@ -46,7 +50,6 @@ public class FlappyBird {
         });
         canvas.animate(() -> gameLoop());
     }
-
 
     public void startScreen(){
         Image startScreenBackground = new Image(WINDOW_WIDTH, WINDOW_HEIGHT, "backgroundImage.png");
@@ -86,6 +89,34 @@ public class FlappyBird {
     public CanvasWindow getCanvas(){
         return canvas;
     }
+    private void createPipe(){ 
+        int gap = 200; 
+        int pipeWidth = 20; 
+        int pipeHeight = 300; 
+        int randomGapPosition = (int)(Math.random()*(canvas.getHeight()-gap-pipeHeight)); 
+        int pipeX = canvas.getWidth(); 
+        int pipeYTop = randomGapPosition; 
+        int pipeYBottom = randomGapPosition + gap + pipeHeight; 
+        // if (upwardPipe.getTopPipeImage() == null) { 
+            topPipeImage = new Image("upwardPipe.png"); 
+        // } 
+        // if (bottomPipe.getBottomPipeImage() == null) { 
+            bottomPipeImage = new Image("bottomPipe.png"); 
+        // } 
+        UpwardPipe pipe = new UpwardPipe(pipeX, pipeYTop, pipeYBottom, pipeWidth, pipeHeight, topPipeImage, bottomPipeImage, canvas); 
+        //GraphicsObject pipeObject = pipe.createGraphicsObject(); 
+        //topPipeImage = new Image( "upwardPipe.png"); 
+        //bottomPipeImage = new Image ("bottomPipe.png"); 
+        pipes.add(pipe); 
+        // canvas.add(pipe.getTopPipeImage()); 
+        // canvas.add(pipe.getBottomPipeImage());
+        topPipeImage.setCenter(400, 50);
+        topPipeImage.setScale(0.17);
+        bottomPipeImage.setCenter(400, 410);
+        bottomPipeImage.setScale(0.17);
+        canvas.add(topPipeImage);
+        canvas.add(bottomPipeImage);
+        }
    
 
     public void gameLoop(){
@@ -115,6 +146,8 @@ public class FlappyBird {
             if (event.getKey().equals(Key.UP_ARROW)) {
                 System.out.println("Hi Hi");
                 bird.moveBird();
+                // if(bird.updatePosition(double dt))
+                //     bird.updatePosition;
                 // bird2.newUpdatePosition();
                 // bird.jumpBird();
             }
@@ -126,7 +159,7 @@ public class FlappyBird {
         int frameCount = 0;
         // bird.newUpdatePosition();
         canvas.add(bird);
-        // createPipe();
+        createPipe();
         Iterator<UpwardPipe> pipes_I = pipes.iterator();
         while(pipes_I.hasNext()){
             UpwardPipe pipe = pipes_I.next();

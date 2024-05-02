@@ -3,20 +3,20 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.CanvasWindow;
 
 public class UpwardPipe extends Image{
-    double x;
-    private double y;
-    private final double width;
-    private final double height;
-    private static final int gap = 200;
-    private boolean passed = false;
-
-        public UpwardPipe(double x, double y, double width, double height) {
-                super("upwardPipe.png");
-                this.x = x;
-                this.y = y;
-                this.width = width;
-                this.height = height;   
-                }  
+        double x;
+        private double y;
+        private final double width;
+        private final double height;
+        private static final int gap = 200;
+        private boolean passed = false;
+    
+            public UpwardPipe(double x, double yTop, double yBottom, double width, double height, Image topPipe, Image bottomPipe, CanvasWindow canvas ) {
+                    super("upwardPipe.png");
+                    this.x = x;
+                    this.y = yTop;
+                    this.width = width;
+                    this.height = height;  
+                    } 
 
         
                    
@@ -76,6 +76,15 @@ public class UpwardPipe extends Image{
         // public Image getBottomPipeImage(){
         //         return bottomPipeImage;
         // }
+
+        public Image getTopPipeImage(){
+                return this;
+                    // return topPipeImage;
+            }
+            public Image getBottomPipeImage(){
+                return this;
+                    // return bottomPipeImage;
+            }
         // public void resetPipe(){
         //         this.x = getCanvasWidth();
         //         yTop = generateRandomYTop();
