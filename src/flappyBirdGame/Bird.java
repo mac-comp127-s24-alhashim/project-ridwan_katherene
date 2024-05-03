@@ -1,7 +1,8 @@
 package flappyBirdGame;
 import edu.macalester.graphics.Image;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 import edu.macalester.graphics.Point;
+
 
 public class Bird extends Image {
     public double x;
@@ -49,7 +50,13 @@ public class Bird extends Image {
         // this.y += velocity;
     }
 
-
+    public boolean collisionWithPipe(UpwardPipe pipe) {
+        if (x + width >= pipe.getX() && x <= pipe.getX() + pipe.getWidth() &&
+            y >= pipe.getY() && y + height <= pipe.getY()) {
+            return true;
+        }
+        return false;
+    }
     public void jumpBird(){
         System.out.println("jump bird");
         this.newUpdatePosition(); 

@@ -8,25 +8,26 @@ import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FlappyBird {
+public class flappyBird {
 
     private Bird bird;
-    private Bird bird2;
+    ///private Bird bird2;
     private scoreboard scoreboard;
     private CanvasWindow canvas;
     private int WINDOW_WIDTH = 600;
     private int WINDOW_HEIGHT = 600;
-    // private static final int PIPES_INTERVAL = 250;
+    private static final int PIPES_INTERVAL = 250;
     // private Image topPipeImage;
     private Image backgroundImage;
     private List<UpwardPipe> pipes = new ArrayList<>();
+    ///private List<BottomPipe> pipes = new ArrayList<>();
     private boolean isStartScreen;
-    private UpwardPipe upwardPipe;
-    private BottomPipe bottomPipe;
+    //private UpwardPipe upwardPipe;
+   ///. private BottomPipe bottomPipe;
     private Image topPipeImage; 
     private Image bottomPipeImage;
 
-    public FlappyBird() {
+    public flappyBird() {
         this.isStartScreen = true;
         backgroundImage = new Image(0, 0, "backgroundImage.png");
         WINDOW_WIDTH = (int)backgroundImage.getWidth();
@@ -34,7 +35,6 @@ public class FlappyBird {
 
         canvas = new CanvasWindow("By Ridwan Osman and Katherene Lugo", WINDOW_WIDTH, WINDOW_HEIGHT);
         canvas.setBackground(new Color(153, 204, 255));
-        // canvas.onKeyDown(event -> onKeyPress(event));
         backgroundImage.setMaxHeight(WINDOW_HEIGHT);
         backgroundImage.setMaxWidth(WINDOW_WIDTH);
         canvas.add(backgroundImage);
@@ -62,6 +62,12 @@ public class FlappyBird {
         startButtonImage.setMaxHeight(WINDOW_HEIGHT);
         startButtonImage.setScale(WINDOW_WIDTH*0.0008, WINDOW_HEIGHT*0.0008);
         startButtonImage.setCenter(WINDOW_WIDTH*0.5, WINDOW_HEIGHT*0.7);
+        canvas.onKeyDown(event -> {
+            isStartScreen = false;
+            System.out.println("Game started!");
+            // Call the game loop when the start button is clicked
+            gameLoop();
+        });
         canvas.add(startScreenBackground);
         canvas.add(startScreenBanner);
         canvas.add(startButtonImage);
@@ -116,66 +122,86 @@ public class FlappyBird {
         bottomPipeImage.setScale(0.17);
         canvas.add(topPipeImage);
         canvas.add(bottomPipeImage);
+        canvas.draw();
         }
    
 
     public void gameLoop(){
+        int frameCount=0;
         
         if(isStartScreen){
             startScreen();
             return;
         }
-        else{
-        //bird.moveBird();
-        canvas.setBackground(new Color(153, 204, 255));
-        backgroundImage.setMaxHeight(WINDOW_HEIGHT);
-        backgroundImage.setMaxWidth(WINDOW_WIDTH);
-        canvas.add(backgroundImage);
-        canvas.remove(bird);
-     
-
-        // bird = new Bird(canvas.getWidth() * 0.5,canvas.getHeight() * 0.5, 50,50);
-        // bird.setCenter(canvas.getWidth() * 0.5,canvas.getHeight() * 0.5 );
-        // canvas.add(bird);
-        // bottomPipeImage = new Image("bottomPipe.png");
-        // topPipeImage = new Image("upwardPipe.png");
+        else{ 
+            
+                canvas.removeAll();
+                canvas.setBackground(new Color(153, 204, 255));
+                backgroundImage.setMaxHeight(WINDOW_HEIGHT);
+                backgroundImage.setMaxWidth(WINDOW_WIDTH);
+                canvas.add(backgroundImage);
+                canvas.add(bird);
+                canvas.onKeyDown(event-> {
+                    if (event.getKey().equals(Key.UP_ARROW)) {
+                        System.out.println("Hi Hi");
+                        bird.moveBird();
+                        // if(bird.updatePosition(double dt))
+                        //     bird.updatePosition;
+                        // bird2.newUpdatePosition();
+                        // bird.jumpBird();
+                    }
+                    return;
+                });
        
+                canvas.add(bird);
+                
+                frameCount++;
+                // Check if it's time to create a new pipe
+                if (frameCount % PIPES_INTERVAL == 0){
+                createPipe();
+                }
+                Iterator<UpwardPipe> pipes_I = pipes.iterator();
+                while(pipes_I.hasNext()){
+                    UpwardPipe pipe = pipes_I.next();
+                    canvas.add(pipe);
+                    //pipe.move();
+                } 
+                movePipes(pipes, canvas);
+                checkCrash();
+                canvas.draw();
+               
+               
 
-        // pipes = new ArrayList<>();
-        canvas.onKeyDown(event-> {
-            if (event.getKey().equals(Key.UP_ARROW)) {
-                System.out.println("Hi Hi");
-                bird.moveBird();
-                // if(bird.updatePosition(double dt))
-                //     bird.updatePosition;
-                // bird2.newUpdatePosition();
-                // bird.jumpBird();
+        }
+    }
+    
+
+    public void checkCrash(){
+        for(UpwardPipe pipe: pipes){
+            if(bird.collisionWithPipe(pipe)){
+                System.out.println("Game Over");
+                resetGame();
+                return;
             }
-            return;
-        });
-       
-        
-
-        int frameCount = 0;
-        // bird.newUpdatePosition();
-        canvas.add(bird);
-        createPipe();
-        Iterator<UpwardPipe> pipes_I = pipes.iterator();
-        while(pipes_I.hasNext()){
-            UpwardPipe pipe = pipes_I.next();
-            // pipe.move();
-        } 
-
+        }
     }
+    public void movePipes(List<UpwardPipe> pipes, CanvasWindow canvas) {
+        for (UpwardPipe pipe : pipes) {
+            pipe.move();
+            pipe.getTopPipeImage().setPosition(pipe.getX(), pipe.getY());
+            pipe.getBottomPipeImage().setPosition(pipe.getX(), pipe.getY());
+        }
+        canvas.draw();
     }
     
     
     
 
 
-   
+ 
     public static void main(String[] args) {
-        FlappyBird game = new FlappyBird();
+        flappyBird game = new flappyBird();
+        game.gameLoop();
     }
 }
 

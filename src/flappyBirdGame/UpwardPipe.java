@@ -9,6 +9,8 @@ public class UpwardPipe extends Image{
         private final double height;
         private static final int gap = 200;
         private boolean passed = false;
+        private static final double SPEED = 2.0;
+        private CanvasWindow canvas;
     
             public UpwardPipe(double x, double yTop, double yBottom, double width, double height, Image topPipe, Image bottomPipe, CanvasWindow canvas ) {
                     super("upwardPipe.png");
@@ -16,17 +18,25 @@ public class UpwardPipe extends Image{
                     this.y = yTop;
                     this.width = width;
                     this.height = height;  
-                    } 
+             } 
 
         
                    
-        // public void move () {
-        //         x -= SPEED;
-        //         if(y<=0){
-        //                 resetPipe();
-        //         }
-        //                 updateImages();
-        //         }
+            public void move () {
+                     x -= SPEED;
+                     if(x+width <=0){
+                       resetPipe();
+                }
+            }
+            private void resetPipe() {
+              
+                x = canvas.getWidth(); 
+            
+                y = Math.random() * (canvas.getHeight() - gap - height); // Adjust as needed
+            }
+            
+                    
+          
 
 
         // public double getX(){
@@ -81,7 +91,7 @@ public class UpwardPipe extends Image{
                 return this;
                     // return topPipeImage;
             }
-            public Image getBottomPipeImage(){
+         public Image getBottomPipeImage(){
                 return this;
                     // return bottomPipeImage;
             }
